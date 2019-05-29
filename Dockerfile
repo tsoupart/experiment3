@@ -6,7 +6,7 @@ RUN apt-get install -y openssh-server nginx
 RUN systemctl enable nginx
 RUN mkdir /var/run/sshd
 
-RUN echo 'root:root' |chpasswd
+RUN echo "root:Docker!" | chpasswd 
 
 RUN sed -ri 's/^#?PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
 RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
@@ -19,7 +19,7 @@ RUN apt-get clean && \
 COPY entrypoint.sh /entrypoint.sh
 COPY index.html /usr/share/nginx/html/index.html
 RUN chmod +x /entrypoint.sh
-EXPOSE 22
-EXPOSE 80
+COPY sshd_config /etc/ssh/
+EXPOSE 80 2222
 
 CMD    ["/entrypoint.sh"]
