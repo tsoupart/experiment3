@@ -20,6 +20,6 @@ COPY entrypoint.sh /entrypoint.sh
 COPY index.html /usr/share/nginx/html/index.html
 RUN chmod +x /entrypoint.sh
 COPY sshd_config /etc/ssh/
-EXPOSE 80 22
+EXPOSE 80 2222
 
 CMD    ["/entrypoint.sh"]
