@@ -1,0 +1,13 @@
+version: '3.4'
+services:
+  odoo:
+    image: exxossodoodevregistry.azurecr.io/exxoss_odoo:TAG
+    deploy:
+      replicas: 4
+      update_config:
+        parallelism: 1
+        order: start-first
+    ports:
+      - "8069:80"
+    volumes:
+      - /tmp/:/tmp/
